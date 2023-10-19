@@ -36,8 +36,8 @@ int main() {
     float trans_fb = axis3;
     float rot = axis4;
 
-    Motor1.spin(forward, 128*trans_fb + 128*rot ,voltageUnits::mV);
-    Motor2.spin(forward, -128*trans_fb + 128*rot ,voltageUnits::mV);  
+    Motor1.spin(forward, 128*trans_fb + 95*rot ,voltageUnits::mV);
+    Motor2.spin(forward, -128*trans_fb + 95*rot ,voltageUnits::mV);  
     
     wait(5,msec);
     ///////////////////////////////旋臂/////////////////////////////////
@@ -45,8 +45,8 @@ int main() {
     
     float rot_xuan_bi = axis2;
 
-    Motor3.spin(forward, -100*rot_xuan_bi ,voltageUnits::mV);
-    Motor4.spin(forward, 100*rot_xuan_bi ,voltageUnits::mV);  
+    Motor3.spin(forward, -95*rot_xuan_bi ,voltageUnits::mV);
+    Motor4.spin(forward, 95*rot_xuan_bi ,voltageUnits::mV);  
     
     wait(5,msec);
     //////////////////////收集/////////////////////////////////////////
