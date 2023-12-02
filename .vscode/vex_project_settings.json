@@ -1,18 +1,19 @@
 {
-	"project": {
-		"name": "VEXcode_Project",
-		"slot": 5,
-		"description": "",
-		"platform": "V5",
-		"creationDate": "Tue, 21 Nov 2023 10:29:24 GMT",
-		"language": "cpp",
-		"sdkVersion": "V5_20220726_10_00_00",
-		"cpp": {
-			"includePath": []
-		}
-	},
 	"extension": {
 		"version": "0.5.0",
-		"json": 1
+		"json": 2
+	},
+	"project": {
+		"name": "2023VEX-16076A",
+		"description": "2023VEX-16076A",
+		"creationDate": "12/2/2023, 4:16:45 PM",
+		"platform": "V5",
+		"language": "cpp",
+		"slot": 1,
+		"sdkVersion": "V5_20220726_10_00_00",
+		"cpp": {
+			"includePath": [],
+			"printf_float": true
+		}
 	}
 }
