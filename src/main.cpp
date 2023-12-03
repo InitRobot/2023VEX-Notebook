@@ -4,7 +4,7 @@ using namespace vex;
 
 const int VOLTAGE3 = 128;//3位数电压上限，方便*100
 const int VOLTAGE5 = 12800;//5位数电压上限
-float sensitivity = 1;//底盘移动灵敏度(0,1]
+float sensitivity = 1, sensitivity_turn = 0.5;//底盘移动灵敏度、底盘转向灵敏度(0,1]
 int roller_dir = 0;//滚筒方向 -1外 0停 1内
 
 //循环内变量需要提前定义，在循环内重新定义会增加运算量
@@ -21,15 +21,15 @@ motor chassis_LBD = motor(PORT3, ratio6_1, true);
 motor_group chassis_L = motor_group(chassis_LF, chassis_LBU, chassis_LBD);
 motor chassis_RF = motor(PORT4, ratio6_1, true);
 motor chassis_RBU = motor(PORT5, ratio6_1, false);
-motor chassis_RBD = motor(PORT6, ratio6_1, true);
+motor chassis_RBD = motor(PORT9, ratio6_1, true);
 motor_group chassis_R = motor_group(chassis_RF, chassis_RBU, chassis_RBD);
 motor roller = motor(PORT7, ratio18_1, false);
 
 //底盘移动函数，添加了防止过载的处理
 void chassis_move()
 {
-  chassis_L_volt = VOLTAGE3 * axis1 + VOLTAGE3 * axis2 * sensitivity;
-  chassis_R_volt = VOLTAGE3 * axis1 - VOLTAGE3 * axis2 * sensitivity;
+  chassis_L_volt = sensitivity * (VOLTAGE3 * axis1 * abs(axis1) / 100.0 * sensitivity_turn + VOLTAGE3 * axis2);
+  chassis_R_volt = sensitivity * (VOLTAGE3 * axis1 * abs(axis1) / 100.0 * sensitivity_turn - VOLTAGE3 * axis2);
   if (chassis_L_volt > VOLTAGE5)
   {
     chassis_L.spin(forward, VOLTAGE5, voltageUnits::mV);
@@ -87,7 +87,7 @@ void roller_move()
   //若按钮按下则更新roller_dir，详见README
   Controller1.ButtonUp.pressed(roller_up);
   Controller1.ButtonDown.pressed(roller_down);
-  //更新旋转放下
+  //更新旋转方向
   roller.spin(forward, VOLTAGE5*roller_dir, voltageUnits::mV);
   return;
 }
@@ -95,17 +95,26 @@ void roller_move()
 //Pre-Autonomous Functions
 void pre_auton(void) 
 {
-  
+  //刹车模式滑行
+  chassis_L.setStopping(coast);
+  chassis_R.setStopping(coast);
+
 }
 
 //Autonomous Functions
 void autonomous(void) 
 {
-
+  //刹车模式回位
+  chassis_L.setStopping(hold);
+  chassis_R.setStopping(hold);
 }
 
 //User Contorl Functions
 void usercontrol(void) {
+  //刹车模式滑行
+  chassis_L.setStopping(coast);
+  chassis_R.setStopping(coast);
+
   // User control code here, inside the loop
   while (1) 
   {
