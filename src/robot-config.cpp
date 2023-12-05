@@ -12,12 +12,12 @@ controller Controller1 = controller(primary);
 
 #ifdef ROBOT_ONE
   motor Motor_BaseLF = motor(PORT1, ratio6_1, true);
-  motor Motor_BaseLM = motor(PORT2, ratio6_1, true);
-  motor Motor_BaseLB = motor(PORT3, ratio6_1, true);
-  motor Motor_BaseRF = motor(PORT4, ratio6_1, false);
-  motor Motor_BaseRM = motor(PORT5, ratio6_1, false);
-  motor Motor_BaseRB = motor(PORT6, ratio6_1, false);
-  inertial IMU = inertial(PORT9);
+  motor Motor_BaseLM = motor(PORT2, ratio6_1, false);//LBU
+  motor Motor_BaseLB = motor(PORT3, ratio6_1, true);//LBD
+  motor Motor_BaseRF = motor(PORT4, ratio6_1, true);
+  motor Motor_BaseRM = motor(PORT5, ratio6_1, false);//RBU
+  motor Motor_BaseRB = motor(PORT9, ratio6_1, true);//RBD
+  inertial IMU = inertial(PORT10);
 #endif
 
 #ifdef ROBOT_TWO

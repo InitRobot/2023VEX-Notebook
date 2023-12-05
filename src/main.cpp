@@ -46,16 +46,17 @@ void usercontrol(void) {
     // Controller Input
     defineController();
     // Base Movement Control
-  if (std::abs(A3) < JOYSTICK_DEADZONE)
-    A3 = 0;
+  A1 = A1 * abs(A1) / 100.0 * 0.5 * SENSITIVITY_TURN;
   if (std::abs(A1) < JOYSTICK_DEADZONE)
     A1 = 0;
-  if (std::abs(A3 + A1) > MOVEMENT_LOWER_LIMIT)
-    moveLeft(A3 + A1);
+  if (std::abs(A2) < JOYSTICK_DEADZONE)
+    A2 = 0;
+  if (std::abs(A1 + A2) > MOVEMENT_LOWER_LIMIT)
+    moveLeft(A1 + A2);
   else
     unlockLeft();
-  if (std::abs(A3 - A1) > MOVEMENT_LOWER_LIMIT)
-    moveRight(A3 - A1);
+  if (std::abs(A1 - A2) > MOVEMENT_LOWER_LIMIT)
+    moveRight(A1 - A2);
   else
     unlockRight();
   }
@@ -71,62 +72,62 @@ void usercontrol(void) {
     }
   }
 
-    if(DOWN && !last_DOWN) {
-      runAuton();
-      // tuning_robot();
-    }
-    // Set auton strategy
-    if(RIGHT && !last_RIGHT) {
-      auton_strategy++;
-      auton_strategy = auton_strategy % 4;
-      switch(auton_strategy) {
-        case 0:
-          Controller1.Screen.setCursor(5, 1);
-          Controller1.Screen.print("%10s", "auto one");
-          break;
-        case 1:
-          Controller1.Screen.setCursor(5, 1);
-          Controller1.Screen.print("%10s", "auto two");
-          break;
-        case 2:
-          Controller1.Screen.setCursor(5, 1);
-          Controller1.Screen.print("%10s", "auto three");
-          break;
-        case 3:
-          Controller1.Screen.setCursor(5, 1);
-          Controller1.Screen.print("%10s", "auto four");
-          break;
-        case 4:
-          Controller1.Screen.setCursor(5, 1);
-          Controller1.Screen.print("%10s", "yousb");
-          break;
-      }
-    }
-    // Print on brain
-    Brain.Screen.setCursor(1, 1);
-    Brain.Screen.print("Heading: %3.2f", my_sensors.getBaseHeading());
-    Brain.Screen.setCursor(2, 1);
-    Brain.Screen.print("Forward Position: %4.1f", my_sensors.getBaseForwardPos());
-    Brain.Screen.setCursor(3, 1);
+  if(DOWN && !last_DOWN) {
+    runAuton();
+    // tuning_robot();
+  }
+  // Set auton strategy
+  if(RIGHT && !last_RIGHT) {
+    auton_strategy++;
+    auton_strategy = auton_strategy % 4;
     switch(auton_strategy) {
       case 0:
-        Brain.Screen.print("%10s", "auto one");
+        Controller1.Screen.setCursor(5, 1);
+        Controller1.Screen.print("%10s", "auto one");
         break;
       case 1:
-        Brain.Screen.print("%10s", "auto two");
+        Controller1.Screen.setCursor(5, 1);
+        Controller1.Screen.print("%10s", "auto two");
         break;
       case 2:
-        Brain.Screen.print("%10s", "auto three");
+        Controller1.Screen.setCursor(5, 1);
+        Controller1.Screen.print("%10s", "auto three");
         break;
       case 3:
-        Brain.Screen.print("%10s", "auto four");
+        Controller1.Screen.setCursor(5, 1);
+        Controller1.Screen.print("%10s", "auto four");
         break;
       case 4:
-        Brain.Screen.print("%10s", "yousb");
+        Controller1.Screen.setCursor(5, 1);
+        Controller1.Screen.print("%10s", "yousb");
         break;
     }
-    this_thread::sleep_for(5);
   }
+  // Print on brain
+  Brain.Screen.setCursor(1, 1);
+  Brain.Screen.print("Heading: %3.2f", my_sensors.getBaseHeading());
+  Brain.Screen.setCursor(2, 1);
+  Brain.Screen.print("Forward Position: %4.1f", my_sensors.getBaseForwardPos());
+  Brain.Screen.setCursor(3, 1);
+  switch(auton_strategy) {
+    case 0:
+      Brain.Screen.print("%10s", "auto one");
+      break;
+    case 1:
+      Brain.Screen.print("%10s", "auto two");
+      break;
+    case 2:
+      Brain.Screen.print("%10s", "auto three");
+      break;
+    case 3:
+      Brain.Screen.print("%10s", "auto four");
+      break;
+    case 4:
+      Brain.Screen.print("%10s", "yousb");
+      break;
+  }
+  this_thread::sleep_for(5);
+}
 
 int main() {
   thread AutonSensors(autonSensors);
