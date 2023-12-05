@@ -1,25 +1,63 @@
-# 16076A-代码说明
+# 2023VEX-16076A-自动测试
 
-## 接线（以主控为原点，滚筒为前方）
+source: [VEX V5 Program Template](https://github.com/CreatechStudio/VEX-V5-Program-Template)
 
-1. 左前电机
-2. 左后上方电机
-3. 左后下方电机
-4. 右前电机
-5. 右后上方电机
-6. ***损坏***
-7. 滚筒小电机
-8. 无线接收器
-9. 右后下方电机
+## 简介
 
-## 操作
+​	这是一个基于VEX V5竞赛模板的基本程序，它由C++编写，包含了
 
-### 摇杆
+- 基本的底盘控制
+- PID控制
+- PID调参
+- 基于电机编码器与陀螺仪的GPS定位
+- 自动框架
 
-- axis1：前后
-- axis2：转向
+## 文件结构
 
-### 按钮
+- 根目录
 
-- 前：滚筒原先停转则向外，原先向内则停转
-- 后：滚筒原先停转则向内，原先向外则停转
+  - data
+
+    <!--MATLAB PID adjustment-->
+
+    - pid_base.m
+
+  - include
+
+    <!--header file-->
+
+    - GPS.h
+    - adjusment.h
+    - base.h
+    - controller.h
+    - my-timer.h
+    - robot-config.h
+    - vex.h
+    - PID.h
+    - autonomous.h
+    - basic-functions.h
+    - math-tools.h
+    - parameters.h
+    - sensors.h
+
+  - src
+
+    <!--source file-->
+
+    - GPS.cpp
+    - adjustment.cpp
+    - base.cpp
+    - main.cpp
+    - my-timer.cpp
+    - sensors.cpp
+    - PID.cpp
+    - autonomous.cpp
+    - basic-functions.cpp  math-tools.cpp
+    - robot-config.cpp
+
+  - vex
+
+    <!--vex basic file-->
+
+    - mkenv.mk
+    - mkrules.mk
