@@ -7,7 +7,8 @@ const float MOVEMENT_LOWER_LIMIT = 5;
 const float JOYSTICK_DEADZONE = 0;//遥控器B：无死区
 const float CHASSIS_GEAR_RATIO = 0.75;
 const float WHEEL_DIAMETER = 2.75;
-const float SENSITIVITY_TURN = 0.85;//转向灵敏度
+const float SENSITIVITY_TURN = 0.7;//转向灵敏度
+const int auton_strategy = 0;//自动策略0-4
 
 #ifdef ROBOT_ONE
   const float BASE_FORWARD_PID[3] = {0, 0, 0};

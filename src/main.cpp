@@ -13,8 +13,6 @@
 using namespace vex;
 competition Competition;
 
-int auton_strategy = 0;
-
 void pre_auton(void) {
   vexcodeInit();
 }
@@ -22,21 +20,22 @@ void pre_auton(void) {
 void autonomous(void) {
   switch(auton_strategy) {
     case 0:
-      //auto one
+      Brain.Screen.print("%10s", "auto one");
       break;
     case 1:
-      //auto two
+      Brain.Screen.print("%10s", "auto two");
       break;
     case 2:
-      //auto three
+      Brain.Screen.print("%10s", "auto three");
       break;
     case 3:
-      //auto four
+      Brain.Screen.print("%10s", "auto four");
       break;
     case 4:
+      Brain.Screen.print("%10s", "yousb");
       auton_sb();
       break;
-    }
+  }
 }
 
 void usercontrol(void) {
@@ -46,7 +45,7 @@ void usercontrol(void) {
     // Controller Input
     defineController();
     // Base Movement Control
-  A1 = A1 * abs(A1) / 100.0 * 0.5 * SENSITIVITY_TURN;
+  A1 = A1 * abs(A1) / 100.0 * SENSITIVITY_TURN;//对转弯做非线性处理
   if (std::abs(A1) < JOYSTICK_DEADZONE)
     A1 = 0;
   if (std::abs(A2) < JOYSTICK_DEADZONE)
@@ -76,56 +75,13 @@ void usercontrol(void) {
     runAuton();
     // tuning_robot();
   }
-  // Set auton strategy
-  if(RIGHT && !last_RIGHT) {
-    auton_strategy++;
-    auton_strategy = auton_strategy % 4;
-    switch(auton_strategy) {
-      case 0:
-        Controller1.Screen.setCursor(5, 1);
-        Controller1.Screen.print("%10s", "auto one");
-        break;
-      case 1:
-        Controller1.Screen.setCursor(5, 1);
-        Controller1.Screen.print("%10s", "auto two");
-        break;
-      case 2:
-        Controller1.Screen.setCursor(5, 1);
-        Controller1.Screen.print("%10s", "auto three");
-        break;
-      case 3:
-        Controller1.Screen.setCursor(5, 1);
-        Controller1.Screen.print("%10s", "auto four");
-        break;
-      case 4:
-        Controller1.Screen.setCursor(5, 1);
-        Controller1.Screen.print("%10s", "yousb");
-        break;
-    }
-  }
+
   // Print on brain
   Brain.Screen.setCursor(1, 1);
   Brain.Screen.print("Heading: %3.2f", my_sensors.getBaseHeading());
   Brain.Screen.setCursor(2, 1);
   Brain.Screen.print("Forward Position: %4.1f", my_sensors.getBaseForwardPos());
   Brain.Screen.setCursor(3, 1);
-  switch(auton_strategy) {
-    case 0:
-      Brain.Screen.print("%10s", "auto one");
-      break;
-    case 1:
-      Brain.Screen.print("%10s", "auto two");
-      break;
-    case 2:
-      Brain.Screen.print("%10s", "auto three");
-      break;
-    case 3:
-      Brain.Screen.print("%10s", "auto four");
-      break;
-    case 4:
-      Brain.Screen.print("%10s", "yousb");
-      break;
-  }
   this_thread::sleep_for(5);
 }
 

@@ -1,4 +1,5 @@
 #include "vex.h"
+#include "parameters.h"
 
 using namespace vex;
 using signature = vision::signature;
@@ -33,11 +34,35 @@ void vexcodeInit(void) {
   while (IMU.isCalibrating()) {
     this_thread::sleep_for(5);
   }
-  Controller1.Screen.setCursor(5, 1);
-  Controller1.Screen.print("%19s", "CA");
+  //Controller1.Screen.setCursor(5, 1);
+  //Controller1.Screen.print("%19s", "CA");
   Controller1.Screen.setCursor(5, 1);
   Controller1.Screen.print("%10s", "l_6_2");
   
+  //show auton_strategy
+  switch (auton_strategy) {
+  case 0:
+    Controller1.Screen.setCursor(5, 1);
+    Controller1.Screen.print("%10s", "auto one");
+    break;
+  case 1:
+    Controller1.Screen.setCursor(5, 1);
+    Controller1.Screen.print("%10s", "auto two");
+    break;
+  case 2:
+    Controller1.Screen.setCursor(5, 1);
+    Controller1.Screen.print("%10s", "auto three");
+    break;
+  case 3:
+    Controller1.Screen.setCursor(5, 1);
+    Controller1.Screen.print("%10s", "auto four");
+    break;
+  case 4:
+    Controller1.Screen.setCursor(5, 1);
+    Controller1.Screen.print("%10s", "yousb");
+    break;
+  }
+
   // Brain.Screen.setCursor(12, 1);
   // Brain.Screen.print("Competition Version");
 }
