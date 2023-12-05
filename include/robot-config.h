@@ -12,6 +12,7 @@ extern motor Motor_BaseLB;
 extern motor Motor_BaseRF;
 extern motor Motor_BaseRM;
 extern motor Motor_BaseRB;
+extern motor Motor_Roller;
 extern inertial IMU;
 
 void  vexcodeInit( void );

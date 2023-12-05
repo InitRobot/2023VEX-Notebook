@@ -18,6 +18,7 @@ controller Controller1 = controller(primary);
   motor Motor_BaseRF = motor(PORT4, ratio6_1, true);
   motor Motor_BaseRM = motor(PORT5, ratio6_1, false);//RBU
   motor Motor_BaseRB = motor(PORT9, ratio6_1, true);//RBD
+  motor Motor_Roller = motor(PORT7, ratio18_1, true);
   inertial IMU = inertial(PORT10);
 #endif
 

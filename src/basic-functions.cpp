@@ -69,6 +69,11 @@ void moveRightVel(float _input) {
   Motor_BaseRB.spin(directionType::fwd, (int) _input, velocityUnits::pct);
 }
 
+//滚轮转动
+void RollerSpin(int vol) {
+  Motor_Roller.spin(directionType::fwd, vol, voltageUnits::mV);
+}
+
 /**
  * locks all motors on right side of base
 */

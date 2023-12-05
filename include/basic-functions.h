@@ -18,6 +18,7 @@ void moveForward(float);
 void moveClockwise(float);
 void lockBase(void);
 void unlockBase(void);
+void RollerSpin(int vol);
 ///////////////////////////////////////////////////////
 // declaration of your output functions here
 ///////////////////////////////////////////////////////

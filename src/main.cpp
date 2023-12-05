@@ -45,36 +45,47 @@ void usercontrol(void) {
     // Controller Input
     defineController();
     // Base Movement Control
-  A1 = A1 * abs(A1) / 100.0 * SENSITIVITY_TURN;//对转弯做非线性处理
-  if (std::abs(A1) < JOYSTICK_DEADZONE)
-    A1 = 0;
-  if (std::abs(A2) < JOYSTICK_DEADZONE)
-    A2 = 0;
-  if (std::abs(A1 + A2) > MOVEMENT_LOWER_LIMIT)
-    moveLeft(A1 + A2);
-  else
-    unlockLeft();
-  if (std::abs(A1 - A2) > MOVEMENT_LOWER_LIMIT)
-    moveRight(A1 - A2);
-  else
-    unlockRight();
+    A1 = A1 * abs(A1) / 100.0 * SENSITIVITY_TURN;//对转弯做非线性处理
+    if (std::abs(A1) < JOYSTICK_DEADZONE)
+      A1 = 0;
+    if (std::abs(A2) < JOYSTICK_DEADZONE)
+      A2 = 0;
+    if (std::abs(A1 + A2) > MOVEMENT_LOWER_LIMIT)
+      moveLeft(A1 + A2);
+    else
+      unlockLeft();
+    if (std::abs(A1 - A2) > MOVEMENT_LOWER_LIMIT)
+      moveRight(A1 - A2);
+    else
+      unlockRight();
+
+    //滚筒移动
+    if(UP && !last_UP) {
+      RollerSpin(VOLTAGE5);
+    }
+    if(DOWN && !last_DOWN) {
+      RollerSpin(-VOLTAGE5);
+    }
+    if(LEFT && !last_LEFT) {
+      RollerSpin(0);
+    }
   }
 
   // Base lock
-  if(B && !last_B) {
-    is_base_locked = !is_base_locked;
-    if(is_base_locked) {
-      lockBase();
-    }
-    else {
-      unlockBase();
-    }
-  }
+// if(B && !last_B) {
+//   is_base_locked = !is_base_locked;
+//   if(is_base_locked) {
+//     lockBase();
+//   }
+//   else {
+//     unlockBase();
+//   }
+// }
 
-  if(DOWN && !last_DOWN) {
-    runAuton();
-    // tuning_robot();
-  }
+// if(DOWN && !last_DOWN) {
+//   runAuton();
+//   // tuning_robot();
+// }
 
   // Print on brain
   Brain.Screen.setCursor(1, 1);
