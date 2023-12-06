@@ -17,19 +17,25 @@ void pre_auton(void) {
   vexcodeInit();
 }
 
-void autonomous(void) {
+void autonomous(void)
+{
+  lockBase();//刹车回位
   switch(auton_strategy) {
     case 0:
       Brain.Screen.print("%10s", "auto one");
+      auton_one();
       break;
     case 1:
       Brain.Screen.print("%10s", "auto two");
+      auton_two();
       break;
     case 2:
       Brain.Screen.print("%10s", "auto three");
+      auton_three();
       break;
     case 3:
       Brain.Screen.print("%10s", "auto four");
+      auton_four();
       break;
     case 4:
       Brain.Screen.print("%10s", "yousb");
@@ -41,7 +47,9 @@ void autonomous(void) {
 void usercontrol(void) {
   // User control code here, inside the loop
   bool is_base_locked = false;
-  while (1) {
+  unlockBase();//刹车滑行
+  while (1)
+  {
     // Controller Input
     defineController();
     // Base Movement Control

@@ -1,4 +1,4 @@
-# 2023VEX-16076A-自动测试
+# 2023VEX-16076A
 
 ## ***Source: [VEX V5 Program Template](https://github.com/CreatechStudio/VEX-V5-Program-Template)***
 
