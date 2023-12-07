@@ -20,6 +20,10 @@ controller Controller1 = controller(primary);
   motor Motor_BaseRB = motor(PORT9, ratio6_1, true);//RBD
   motor Motor_Roller = motor(PORT7, ratio18_1, true);
   inertial IMU = inertial(PORT10);
+  motor_group BaseL= motor_group(Motor_BaseLB, Motor_BaseLF, Motor_BaseLM);
+  motor_group BaseR= motor_group(Motor_BaseRB, Motor_BaseRF, Motor_BaseRM);
+  smartdrive Drivetrain = smartdrive(BaseL, BaseR, IMU, 0, 320, 40, mm, 1);//垂直距离、轮距、轴距
+  motor Motor_Shoot = motor(PORT11, ratio6_1, false);
 #endif
 
 #ifdef ROBOT_TWO

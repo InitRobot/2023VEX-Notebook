@@ -56,14 +56,14 @@ void usercontrol(void) {
     A1 = A1 * abs(A1) / 100.0 * SENSITIVITY_TURN;//对转弯做非线性处理
     if (std::abs(A1) < JOYSTICK_DEADZONE)
       A1 = 0;
-    if (std::abs(A2) < JOYSTICK_DEADZONE)
-      A2 = 0;
-    if (std::abs(A1 + A2) > MOVEMENT_LOWER_LIMIT)
-      moveLeft(A1 + A2);
+    if (std::abs(A3) < JOYSTICK_DEADZONE)
+      A3 = 0;
+    if (std::abs(A1 + A3) > MOVEMENT_LOWER_LIMIT)
+      moveLeft(A1 + A3);
     else
       unlockLeft();
-    if (std::abs(A1 - A2) > MOVEMENT_LOWER_LIMIT)
-      moveRight(A1 - A2);
+    if (std::abs(A1 - A3) > MOVEMENT_LOWER_LIMIT)
+      moveRight(A1 - A3);
     else
       unlockRight();
 
@@ -76,6 +76,10 @@ void usercontrol(void) {
     }
     if(LEFT && !last_LEFT) {
       RollerSpin(0);
+    }
+
+    if(L1 && ! last_L1) {
+      Shoot();
     }
   }
 

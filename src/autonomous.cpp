@@ -32,7 +32,7 @@ void auton_sb(void) {
 }
 
 void auton_one(void){
-
+  Drivetrain.driveFor(1400,distanceUnits::mm, 100, velocityUnits::pct,true);
 }
 
 void auton_two(void){
